@@ -1,26 +1,75 @@
 #include<stdio.h>
 #include<math.h>
+#define MAXLENGTH 1000
 
 unsigned int setbits(int x,int p,int n,int y);
 unsigned int invert(int x,int p,int n);
+int bitcount(unsigned int x);
 void showBits(int digit);
+int fastBitCount(unsigned int x);
+void lower(char src[]);
+
 
 int main()
 {
 
     //unsigned int setbits1=setbits(0,10,3,253);
-    unsigned int inverts1=invert(0,10,3);
+    //unsigned int inverts1=invert(5,2,3);
 
-    unsigned int test1=inverts1;
-    showBits(test1);
+    //unsigned int test1=inverts1;
+    //showBits(test1);
+    int digit=12346541;
+    showBits(digit);
+
+    printf("bitcount=%d\n",bitcount(digit));
+    printf("fastBitCount=%d\n",fastBitCount(digit));
+
+    int n=2;
+    printf("you have %d item%s\n",n,n>1?"s":"");
+
+    char string[MAXLENGTH]="aBcDeFghijK";
+    printf("%s\n",string);
+    lower(string);
+    printf("%s\n",string);
 
     return 0;
 }
 
+void lower(char src[])
+{
+    int i=0;
+    int dis='A'-'a';
+    while(src[i]!='\0')
+    {
+        src[i]=(src[i]>='A'&&src[i]<='Z')?src[i]-dis:src[i];
+        i++;
+    }
+}
+
+int bitcount(unsigned int x)
+{
+    int b;
+    for(b=0;x!=0;x>>=1)
+    {
+        if(x&01)
+        b++;
+    }
+    return b;
+}
+int fastBitCount(unsigned int x)
+{
+    int count=0;
+    while(x!=0)
+    {
+        x&=(x-1);
+        count++;
+    }
+    return count;
+}
 
 unsigned int setbits(int x,int p,int n,int y)
 {
-    int x2=x;
+    unsigned int x2=(unsigned int)x;
 
 
     int intSize=sizeof(int)*8;
@@ -49,6 +98,8 @@ unsigned int invert(int x,int p,int n)
 
     unsigned int inverseZero=~0;
     unsigned int mask=(inverseZero<<(p-n+1))&(inverseZero>>(intSize-p-1));
+    
+
     return (~x)&mask+(x&(~mask));
 }
 
