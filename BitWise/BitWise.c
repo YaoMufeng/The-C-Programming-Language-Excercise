@@ -2,15 +2,10 @@
 #include<math.h>
 #define MAXLENGTH 1000
 
-unsigned int setbits(int x,int p,int n,int y);
-unsigned int invert(int x,int p,int n);
-int bitcount(unsigned int x);
-void showBits(int digit);
-int fastBitCount(unsigned int x);
-void lower(char src[]);
+#include"BitWise.h"
 
 
-int main()
+/*int main()
 {
 
     //unsigned int setbits1=setbits(0,10,3,253);
@@ -33,7 +28,7 @@ int main()
     printf("%s\n",string);
 
     return 0;
-}
+}*/
 
 void lower(char src[])
 {
